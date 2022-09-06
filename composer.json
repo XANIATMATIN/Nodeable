@@ -1,0 +1,22 @@
+{
+    "name": "matin-utils/nodable",
+    "description": "nodable",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "aghaie",
+            "email": "maryamaghaie2570@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "classmap": [],
+        "files": [
+            "Functions.php"
+        ],
+        "psr-4": {
+            "MatinUtils\\Nodable\\": "src/"
+        }
+    }
+}
