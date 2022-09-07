@@ -3,5 +3,5 @@
 
 function nodeTable($tableName)
 {
-    return app('nodable')->prefix. $tableName;
+    return app('nodable')->getPrefix(). $tableName;
 }
