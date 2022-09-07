@@ -4,7 +4,7 @@ namespace MatinUtils\Nodable;
 
 class Singleton
 {
-    protected $prefix;
+    public $prefix;
     public function __construct()
     {
         $configs = config('nodable');

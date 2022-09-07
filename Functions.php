@@ -3,5 +3,5 @@
 
 function nodeTable($tableName)
 {
-    return 'n' . node()->id . '_' . $tableName;
+    return app('nodable')->prefix. $tableName;
 }
