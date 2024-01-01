@@ -6,14 +6,15 @@ use Illuminate\Contracts\Validation\Rule;
 
 class ModelExist implements Rule
 {
-    protected $model, $modelName, $column, $relations, $conditions = [], $select = [];
-    public function __construct(string $modelName, string $column = 'id', array $relations = [], array $conditions = [], $select = null)
+    protected $model, $modelName, $column, $relations, $conditions = [], $select = [], $withTrashed;
+    public function __construct(string $modelName, string $column = 'id', array $relations = [], array $conditions = [], $select = null, $withTrashed = false)
     {
         $this->modelName = $modelName;
         $this->column = $column;
         $this->relations = $relations;
         $this->conditions = $conditions;
         $this->select = $select;
+        $this->withTrashed = $withTrashed;
     }
 
     public function getModel()
@@ -35,7 +36,10 @@ class ModelExist implements Rule
             }
         })->when(!empty($this->select), function ($query) {
             $query->select($this->select);
-        })->where($this->column, $value)->with($this->relations)->first();
+        })->where($this->column, $value)->with($this->relations)
+            ->when(($this->withTrashed), function ($query) {
+                $query->withTrashed();
+            })->first();
         if (empty($this->model)) {
             return false;
         }
